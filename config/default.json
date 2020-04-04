@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://imronha:password12345@devbook-aqn0m.mongodb.net/test?retryWrites=true&w=majority"
+}
