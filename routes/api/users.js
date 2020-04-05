@@ -31,6 +31,8 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    // Pull fields out of req.body
     const { name, email, password } = req.body;
     // console.log(req.body);
 
