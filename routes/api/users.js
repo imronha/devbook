@@ -18,6 +18,7 @@ const User = require("../../models/User");
 router.post(
   "/",
   [
+    // Validation
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please use a valid email").isEmail(),
     check("password", "Password must be 6 or more characters long").isLength({
