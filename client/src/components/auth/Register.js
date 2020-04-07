@@ -1,4 +1,8 @@
 import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Used axios to send reg req to backend
+// import axios from "axios";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,15 +13,36 @@ const Register = () => {
   });
 
   const { name, email, password, password2 } = formData;
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    // Check to see if passwords entered match
     if (password !== password2) {
       console.log("Passwords do not match");
     } else {
-      console.log(formData);
+      console.log("Successfully registered new user.");
+      // The following code successfully creates new user in db but this will be handled by redux later
+      //   const newUser = {
+      //     name,
+      //     email,
+      //     password,
+      //   };
+
+      //   // Send new user registration form to backend
+      //   try {
+      //     const config = {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //     };
+      //     const body = JSON.stringify(newUser);
+      //     const res = await axios.post("/api/users", body, config);
+      //     console.log(res.data);
+      //   } catch (err) {}
+      //   console.log(formData);
     }
   };
   return (
@@ -75,7 +100,7 @@ const Register = () => {
           <input type="submit" className="btn btn-primary" value="Register" />
         </form>
         <p className="my-1">
-          Already have an account? <a href="login.html">Sign In</a>
+          Already have an account? <Link to="/login">Sign In</Link>
         </p>
       </section>
     </Fragment>
