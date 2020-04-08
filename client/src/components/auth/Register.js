@@ -1,9 +1,12 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-// Connect register component to redux and bring in setAlert action
+// Connect register component to redux
 import { connect } from "react-redux";
+
+// Import actions
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 
 import PropTypes from "prop-types";
 
@@ -11,7 +14,7 @@ import PropTypes from "prop-types";
 // import axios from "axios";
 
 // Destructure props so we dont have to do props.setAlert
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,6 +22,7 @@ const Register = ({ setAlert }) => {
     password2: "",
   });
 
+  // Deconstruct data from form data to use in onSubmit
   const { name, email, password, password2 } = formData;
 
   const onChange = (e) =>
@@ -32,26 +36,8 @@ const Register = ({ setAlert }) => {
       setAlert("Passwords do not match", "danger");
       //console.log("Passwords do not match");
     } else {
-      console.log("Successfully registered new user.");
-      // The following code successfully creates new user in db but this will be handled by redux later
-      //   const newUser = {
-      //     name,
-      //     email,
-      //     password,
-      //   };
-
-      //   // Send new user registration form to backend
-      //   try {
-      //     const config = {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //     };
-      //     const body = JSON.stringify(newUser);
-      //     const res = await axios.post("/api/users", body, config);
-      //     console.log(res.data);
-      //   } catch (err) {}
-      //   console.log(formData);
+      register({ name, email, password });
+      //console.log("Successfully registered new user.");
     }
   };
   return (
@@ -69,7 +55,6 @@ const Register = ({ setAlert }) => {
               name="name"
               value={name}
               onChange={(e) => onChange(e)}
-              required
             />
           </div>
           <div className="form-group">
@@ -79,7 +64,6 @@ const Register = ({ setAlert }) => {
               name="email"
               value={email}
               onChange={(e) => onChange(e)}
-              required
             />
             <small className="form-text">
               This site uses Gravatar so if you want a profile image, use a
@@ -93,7 +77,6 @@ const Register = ({ setAlert }) => {
               name="password"
               value={password}
               onChange={(e) => onChange(e)}
-              minLength="6"
             />
           </div>
           <div className="form-group">
@@ -103,7 +86,6 @@ const Register = ({ setAlert }) => {
               value={password2}
               onChange={(e) => onChange(e)}
               name="password2"
-              minLength="6"
             />
           </div>
           <input type="submit" className="btn btn-primary" value="Register" />
@@ -118,7 +100,8 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 // Export connects with setAlert action
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
