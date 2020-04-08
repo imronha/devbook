@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // Connect register component to redux
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 // import axios from "axios";
 
 // Destructure props so we dont have to do props.setAlert
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,6 +40,12 @@ const Register = ({ setAlert, register }) => {
       //console.log("Successfully registered new user.");
     }
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Fragment>
       <section className="container">
@@ -101,7 +107,12 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
 // Export connects with setAlert action
-export default connect(null, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

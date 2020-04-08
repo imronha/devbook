@@ -9,3 +9,7 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 // Export actions for user load success/failure
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
+
+// Export actions for user login success/failure
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
