@@ -1,7 +1,39 @@
 // Req to backend made here using axios
 import axios from "axios";
 import { setAlert } from "./alert";
-import { REGISTER_SUCCESS, REGISTER_FAIL } from "./types";
+
+// Import setAuthToken (use to check for token and send with req header, else delete headers )
+import setAuthToken from "../utils/setAuthToken";
+
+// Import types
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+} from "./types";
+
+// Load user
+export const loadUser = () => async (dispatch) => {
+  // Check if token is available
+  if (localStorage.token) {
+    // Send token to global header using setAuthToken
+    setAuthToken(localStorage.token);
+  }
+
+  // Make req to load user
+  try {
+    const res = await axios.get("/api/auth");
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
 
 // Register the user
 export const register = ({ name, email, password }) => async (dispatch) => {
