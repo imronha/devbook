@@ -1,10 +1,17 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
+// Connect register component to redux and bring in setAlert action
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+
+import PropTypes from "prop-types";
+
 // Used axios to send reg req to backend
 // import axios from "axios";
 
-const Register = () => {
+// Destructure props so we dont have to do props.setAlert
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +28,9 @@ const Register = () => {
     e.preventDefault();
     // Check to see if passwords entered match
     if (password !== password2) {
-      console.log("Passwords do not match");
+      // Call setAlert when pw's dont match
+      setAlert("Passwords do not match", "danger");
+      //console.log("Passwords do not match");
     } else {
       console.log("Successfully registered new user.");
       // The following code successfully creates new user in db but this will be handled by redux later
@@ -107,4 +116,9 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+// Export connects with setAlert action
+export default connect(null, { setAlert })(Register);
