@@ -13,3 +13,6 @@ export const AUTH_ERROR = "AUTH_ERROR";
 // Export actions for user login success/failure
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+
+// Export actions for user logout
+export const LOGOUT = "LOGOUT";
