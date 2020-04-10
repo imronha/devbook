@@ -16,3 +16,8 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 
 // Export actions for user logout
 export const LOGOUT = "LOGOUT";
+
+// Export actions for getting user profile / error / clear profile
+export const GET_PROFILE = "GET_PROFILE";
+export const PROFILE_ERROR = "PROFILE_ERROR";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";

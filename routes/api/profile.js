@@ -19,12 +19,15 @@ const User = require("../../models/User");
 router.get("/me", auth, async (req, res) => {
   try {
     // Name and avatar are in the user model so use .populate(model, [fields to bring in]) to bring in desired fields
+    // console.log("profile route");
     const profile = await Profile.findOne({
       user: req.user.id,
-    }).populate("user", ["name", "avatar"]);
+    });
+    // console.log(profile);
     if (!profile) {
-      res.status(400).json({ msg: "Current user has no profile" });
+      return res.status(400).json({ msg: "Current user has no profile" });
     }
+    res.json(profile.populate("user", ["name", "avatar"]));
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

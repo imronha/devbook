@@ -1,3 +1,5 @@
+// Auth reducer
+
 // Import types
 import {
   REGISTER_SUCCESS,
