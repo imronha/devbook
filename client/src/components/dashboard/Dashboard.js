@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 
 // Import actions
 import { getCurrentProfile } from "../../actions/profile";
+import DashboardActions from "./DashboardActions";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -29,7 +30,9 @@ const Dashboard = ({
       <p className="lead"></p>
       <i className="fas fa-user">Welcome {user && user.name}</i>
       {profile !== null ? (
-        <Fragment>Has profile</Fragment>
+        <Fragment>
+          <DashboardActions />
+        </Fragment>
       ) : (
         <Fragment>
           <p>Please set up your profile</p>
