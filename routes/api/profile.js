@@ -363,6 +363,8 @@ router.get("/github/:username", (req, res) => {
   try {
     // Create options object that has our URI to plug into request package
     // Pass in github client ID and github client secret to URI
+    // console.log(req.params.username);
+    // console.log(config.get("githubSecret"));
     const options = {
       uri: `https://api.github.com/users/${
         req.params.username
@@ -375,6 +377,7 @@ router.get("/github/:username", (req, res) => {
 
     // Pass in options object to request
     request(options, (error, response, body) => {
+      // console.log(response.body);
       if (error) console.error(error);
       if (response.statusCode !== 200) {
         return res.status(404).json({ msg: "No Github profile found" });

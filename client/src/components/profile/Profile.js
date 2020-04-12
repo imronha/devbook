@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getProfileById } from "../../actions/profile";
 import { Link } from "react-router-dom";
+
+// Import child components
 import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({
   match,
@@ -37,7 +40,7 @@ const Profile = ({
               </Link>
             )}
 
-          <div class="profile-grid my-1">
+          <div className="profile-grid my-1">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
             <div className="profile-exp bg-white p-2">
@@ -70,6 +73,9 @@ const Profile = ({
                 <h4>No Education found</h4>
               )}
             </div>
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
           </div>
         </Fragment>
       )}
