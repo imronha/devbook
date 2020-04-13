@@ -13,6 +13,7 @@ const PostItem = ({
   addLike,
   removeLike,
   deletePost,
+  showActions,
 }) => {
   return (
     <div className="posts">
@@ -28,41 +29,48 @@ const PostItem = ({
           <p className="post-date">
             Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
           </p>
-
-          <button
-            onClick={(e) => addLike(_id)}
-            type="button"
-            className="btn btn-light"
-          >
-            <i className="fas fa-thumbs-up" />{" "}
-            <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-          </button>
-          <button
-            onClick={(e) => removeLike(_id)}
-            type="button"
-            className="btn btn-light"
-          >
-            <i className="fas fa-thumbs-down" />
-          </button>
-          <Link to={`/post/${_id}`} className="btn btn-primary">
-            Discussion{" "}
-            {comments.length > 0 && (
-              <span className="comment-count">{comments.length}</span>
-            )}
-          </Link>
-          {!auth.loading && user === auth.user._id && (
-            <button
-              onClick={(e) => deletePost(_id)}
-              type="button"
-              className="btn btn-danger"
-            >
-              <i className="fas fa-times"></i>
-            </button>
+          {showActions && (
+            <Fragment>
+              <button
+                onClick={(e) => addLike(_id)}
+                type="button"
+                className="btn btn-light"
+              >
+                <i className="fas fa-thumbs-up" />{" "}
+                <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+              </button>
+              <button
+                onClick={(e) => removeLike(_id)}
+                type="button"
+                className="btn btn-light"
+              >
+                <i className="fas fa-thumbs-down" />
+              </button>
+              <Link to={`/posts/${_id}`} className="btn btn-primary">
+                Discussion{" "}
+                {comments.length > 0 && (
+                  <span className="comment-count">{comments.length}</span>
+                )}
+              </Link>
+              {!auth.loading && user === auth.user._id && (
+                <button
+                  onClick={(e) => deletePost(_id)}
+                  type="button"
+                  className="btn btn-danger"
+                >
+                  <i className="fas fa-times"></i>
+                </button>
+              )}
+            </Fragment>
           )}
         </div>
       </div>
     </div>
   );
+};
+
+PostItem.defaultProps = {
+  showActions: true,
 };
 
 PostItem.propTypes = {
