@@ -138,6 +138,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
       formData,
       config
     );
+
     console.log(res.data);
     dispatch({
       type: ADD_COMMENT,

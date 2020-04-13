@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://imronha:password12345@devbook-aqn0m.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtToken": "mysecrettoken",
+  "githubClientId": "f1b2c633ca9f8fcea11c",
+  "githubSecret": "f8aada735387ad6cef7fd75c4b1d0042acd68d40"
+}

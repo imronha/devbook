@@ -12,7 +12,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost, match.params.id]);
-  console.log(post);
+
   return loading || post === null ? (
     <Spinner />
   ) : (
